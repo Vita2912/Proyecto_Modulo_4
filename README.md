@@ -2,7 +2,7 @@
 
 Proyecto integrador correspondiente al Módulo 4.
 
-El objetivo es desarrollar progresivamente un sistema bancario utilizando JavaScript moderno, arquitectura modular, programación orientada a objetos y programación funcional.
+El proyecto utiliza JavaScript moderno, programación orientada a objetos, programación funcional, arquitectura modular, manipulación del DOM, LocalStorage y librerías externas.
 
 ## Tecnologías
 
@@ -13,18 +13,9 @@ El objetivo es desarrollar progresivamente un sistema bancario utilizando JavaSc
 - Node.js
 - npm
 - LocalStorage
+- SweetAlert2
 - Git
 - GitHub
-
-## Arquitectura
-
-El proyecto utiliza las siguientes capas:
-
-- Models
-- Services
-- UI
-- Utils
-- Tests
 
 ## Arquitectura actual
 
@@ -39,7 +30,15 @@ js/
 │   └── Usuario.js
 │
 ├── services/
+│   ├── AuthService.js
+│   ├── BancoService.js
 │   └── StorageService.js
+│
+├── ui/
+│   ├── CuentaUI.js
+│   ├── DashboardUI.js
+│   ├── MovimientosUI.js
+│   └── TransferenciasUI.js
 │
 └── utils/
     ├── formatters.js
@@ -47,123 +46,193 @@ js/
     └── validators.js
 ```
 
-## Models
+## Páginas
 
-### Usuario
+La aplicación actualmente contiene:
 
-Representa a una persona registrada dentro del sistema.
+- `index.html`
+- `dashboard.html`
+- `cuenta.html`
+- `movimientos.html`
+- `transferencia.html`
 
-### Cuenta
+## Autenticación
 
-Representa una cuenta bancaria perteneciente a un usuario.
+El sistema permite:
 
-Métodos principales:
+- Registrar usuarios.
+- Iniciar sesión.
+- Mantener sesión mediante LocalStorage.
+- Cerrar sesión.
+- Proteger páginas privadas.
 
-- `depositar()`
-- `retirar()`
+## Dashboard
 
-### Movimiento
+El dashboard muestra:
 
-Representa una operación realizada sobre una cuenta bancaria.
+- Usuario autenticado.
+- Saldo total.
+- Cantidad de cuentas.
+- Cantidad de movimientos.
+- Cuenta principal.
+- Saldo disponible.
 
-### Banco
+## Mi cuenta
 
-Coordina usuarios, cuentas y movimientos y aplica las reglas del dominio bancario.
+La página de cuenta permite:
 
-Métodos principales:
+- Consultar datos bancarios.
+- Modificar información personal.
+- Cambiar contraseña.
+- Eliminar la cuenta cuando el saldo sea cero.
 
-- `agregarUsuario()`
-- `buscarUsuarioPorId()`
-- `agregarCuenta()`
-- `buscarCuentaPorId()`
-- `buscarCuentaPorNumero()`
-- `obtenerCuentasDeUsuario()`
-- `registrarMovimiento()`
-- `realizarDeposito()`
-- `obtenerMovimientosDeCuenta()`
+## Operaciones bancarias
 
-## Services
+Actualmente se soportan:
 
-### StorageService
+### Depósitos
 
-Centraliza la comunicación con LocalStorage.
+Los depósitos:
 
-Métodos disponibles:
+1. Validan el monto.
+2. Actualizan el saldo.
+3. Generan un movimiento `DEPOSITO`.
+4. Persisten la operación.
 
-- `guardar()`
-- `obtener()`
-- `eliminar()`
-- `limpiar()`
+### Transferencias
 
-## Claves de almacenamiento
+Las transferencias:
 
-El sistema utiliza:
+1. Validan cuenta origen.
+2. Validan cuenta destino.
+3. Validan el monto.
+4. Evitan transferencias a la misma cuenta.
+5. Validan saldo suficiente.
+6. Retiran dinero de la cuenta origen.
+7. Depositan dinero en la cuenta destino.
+8. Generan `TRANSFERENCIA_ENVIADA`.
+9. Generan `TRANSFERENCIA_RECIBIDA`.
+10. Persisten saldos y movimientos.
 
-- `STORAGE_KEYS.USUARIOS`
-- `STORAGE_KEYS.CUENTAS`
-- `STORAGE_KEYS.MOVIMIENTOS`
-- `STORAGE_KEYS.SESION`
+## Movimientos
 
-La clave `SESION` será utilizada en la versión dedicada a autenticación.
+La página `movimientos.html` permite consultar el historial bancario.
 
-## Persistencia
+Los tipos soportados son:
 
-Los objetos JavaScript son convertidos a JSON mediante:
+- `DEPOSITO`
+- `TRANSFERENCIA_ENVIADA`
+- `TRANSFERENCIA_RECIBIDA`
 
-```javascript
-JSON.stringify();
-```
+## Perspectiva del usuario
 
-y recuperados mediante:
+Los movimientos se muestran de acuerdo con la cuenta del usuario.
 
-```javascript
-JSON.parse();
-```
+Un depósito pertenece al usuario cuando su cuenta es la cuenta origen.
 
-Después de recuperar los datos se reconstruyen las instancias de:
+Una transferencia enviada pertenece al usuario cuando una de sus cuentas es la cuenta origen.
 
-- `Usuario`
-- `Cuenta`
-- `Movimiento`
+Una transferencia recibida pertenece al usuario cuando una de sus cuentas es la cuenta destino.
 
-para recuperar también el comportamiento definido en sus clases.
+Esto evita mostrar las dos representaciones de una transferencia al mismo usuario.
+
+## Filtros
+
+El historial permite filtrar por:
+
+- Todos.
+- Depósitos.
+- Transferencias enviadas.
+- Transferencias recibidas.
+
+## Ordenamiento
+
+Los movimientos se ordenan desde la operación más reciente hasta la más antigua.
+
+## Programación funcional aplicada
+
+Durante el proyecto se utilizan métodos como:
+
+- `map()`
+- `filter()`
+- `find()`
+- `findIndex()`
+- `some()`
+- `reduce()`
+- `forEach()`
+- `includes()`
+- `sort()`
+- `flatMap()`
+
+También se utiliza:
+
+- Destructuring.
+- Spread Operator.
+- Template literals.
+- Operador ternario.
+
+## SweetAlert2
+
+SweetAlert2 se utiliza para:
+
+- Validaciones.
+- Mensajes de éxito.
+- Errores.
+- Confirmación de transferencias.
+- Confirmación de cierre de sesión.
+- Confirmación de eliminación de usuario.
 
 ## Funcionalidades implementadas
 
-Actualmente el sistema permite:
+Actualmente el proyecto permite:
 
-- Crear usuarios.
+- Registrar usuarios.
 - Crear cuentas.
-- Relacionar cuentas con usuarios.
+- Autenticarse.
+- Mantener sesión.
+- Consultar Dashboard.
+- Consultar Mi cuenta.
+- Modificar datos.
+- Cambiar contraseña.
+- Eliminar cuenta.
 - Realizar depósitos.
+- Realizar transferencias.
+- Actualizar saldos.
 - Registrar movimientos.
-- Aplicar reglas básicas del dominio.
-- Guardar usuarios en LocalStorage.
-- Guardar cuentas en LocalStorage.
-- Guardar movimientos en LocalStorage.
-- Recuperar datos después de recargar la página.
-- Reconstruir instancias de las clases almacenadas.
+- Mostrar depósitos.
+- Mostrar transferencias enviadas.
+- Mostrar transferencias recibidas.
+- Filtrar movimientos.
+- Ordenar movimientos por fecha.
+- Mantener persistencia con LocalStorage.
 
-## Funcionalidades previstas
+## Próximas versiones
 
-Durante las siguientes versiones se desarrollarán:
+La siguiente versión incorporará principalmente:
 
-- Registro de usuarios desde interfaz.
-- Autenticación.
-- Manejo de sesión.
-- SweetAlert2.
-- Dashboard.
-- Gestión de cuenta.
-- Transferencias.
-- Historial visual de movimientos.
-- Manipulación del DOM.
-- Eventos.
-- Pruebas automatizadas con Jest.
+- Jest.
+- jsdom.
+- Pruebas de modelos.
+- Pruebas de utilidades.
+- Pruebas de AuthService.
+- Pruebas de BancoService.
+- Pruebas de operaciones bancarias.
+- Pruebas de casos negativos.
 
-## Versión actual
+Después se realizará la revisión final para `v1.0.0`.
+
+## Versiones
 
 v0.1.0 — Estructura inicial del proyecto.
 v0.2.0 — Arquitectura modular y utilidades base.
 v0.3.0 — Modelado del dominio con Programación Orientada a Objetos.
 v0.4.0 — Modelo Banco y reglas del dominio bancario.
 v0.5.0 — Persistencia con LocalStorage y StorageService.
+v0.6.0 — Registro, autenticación, sesión y SweetAlert2.
+v0.7.0 — BancoService y Dashboard bancario.
+v0.8.0 — Gestión de cuenta, perfil y seguridad.
+v0.9.0 - operaciones bancarias y transferencias.
+
+## Versión actual
+
+v0.10.0 — Historial de movimientos y filtros.

@@ -1,12 +1,10 @@
-// FORMATEADORES DE INFORMACIÓN
+// Funciones para darle formato bonito a los datos antes de mostrarlos
 
-// FORMATEAR MONEDA
-
-// Convierte un valor a formato monetario utilizando pesos mexicanos.
+// Formateamos cualquier número a pesos mexicanos
 export function formatCurrency(valor) {
   const numero = Number(valor);
 
-  // Si el resultado no es un número válido, regresamos un monto por defecto.
+  // Si nos pasan algo raro que no sea número, devolvemos $0.00 para no romper la pantalla
   if (!Number.isFinite(numero)) {
     return "$0.00";
   }
@@ -17,13 +15,12 @@ export function formatCurrency(valor) {
   });
 }
 
-// FORMATEAR FECHA
-
+// Convertimos cualquier texto/timestamp a una fecha legible en español
 export function formatDate(fecha) {
-  // Convertimos el valor a un objeto Date
+  // Intentamos crear el objeto fecha
   const fechaObjeto = new Date(fecha);
 
-  // Comprobamos que sea una fecha válida
+  // Si la fecha es inválida o viene vacía, regresamos un string vacío
   if (Number.isNaN(fechaObjeto.getTime())) {
     return "";
   }
@@ -31,11 +28,10 @@ export function formatDate(fecha) {
   return fechaObjeto.toLocaleDateString("es-MX");
 }
 
-// FORMATEAR NÚMERO DE CUENTA
-
+// Separamos los 12 dígitos de la cuenta en bloques de 4 para que sea fácil de leer
 export function formatAccountNumber(numeroCuenta) {
   const numero = String(numeroCuenta ?? "");
 
-  // Utilizamos una expresión regular para separar grupos de cuatro dígitos.
+  // Usamos regex para meter un espacio cada 4 números
   return numero.replace(/(\d{4})(?=\d)/g, "$1 ");
 }

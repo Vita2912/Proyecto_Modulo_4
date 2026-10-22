@@ -1,7 +1,4 @@
-// CLAVES DE ALMACENAMIENTO
-
-// Centralizamos los nombres de todas las claves utilizadas por LocalStorage.
-// Así evitamos escribir cadenas manualmente por todo el proyecto.
+// Centralizamos las llaves del localStorage para no andar escribiendo textos a mano por todos lados
 export const STORAGE_KEYS = {
   USUARIOS: "usuarios",
   CUENTAS: "cuentas",
@@ -9,29 +6,27 @@ export const STORAGE_KEYS = {
   SESION: "sesion",
 };
 
-// Esta clase centralizará toda la comunicación con LocalStorage.
+// Clase para manejar todo lo que entra y sale de localStorage
 class StorageService {
-  // GUARDAR INFORMACIÓN
-
+  // Para guardar datos convirtiéndolos a JSON
   guardar(clave, valor) {
     const valorJSON = JSON.stringify(valor);
 
-    // Guardamos el JSON utilizando la clave recibida.
+    // Guardamos la cadena JSON con su clave
     localStorage.setItem(clave, valorJSON);
   }
 
-  // OBTENER INFORMACIÓN
-
+  // Para recuperar y parsear los datos guardados
   obtener(clave, valorPorDefecto = null) {
-    // getItem() devuelve el contenido almacenado como texto. Si la clave no existe devuelve null.
+    // Si la clave no existe, localStorage nos devuelve null
     const valor = localStorage.getItem(clave);
 
-    // VALIDAR SI EXISTE INFORMACIÓN
+    // Si no hay nada guardado, regresamos el valor por defecto que le pasemos
     if (valor === null) {
       return valorPorDefecto;
     }
 
-    // CONVERTIR JSON
+    // Intentamos convertir la cadena de texto a un objeto JS
     try {
       return JSON.parse(valor);
     } catch (error) {
@@ -44,21 +39,16 @@ class StorageService {
     }
   }
 
-  // ELIMINAR INFORMACIÓN
-
-  // Elimina únicamente la clave recibida sin afectar el resto de LocalStorage.
+  // Para borrar una sola clave en específico
   eliminar(clave) {
     localStorage.removeItem(clave);
   }
 
-  // LIMPIAR LOCALSTORAGE
-
+  // Para borrar absolutamente todo el localStorage
   limpiar() {
     localStorage.clear();
   }
 }
 
-// CREAR INSTANCIA DEL SERVICIO
-
-// Creamos una sola instancia que podrá reutilizarse desde diferentes módulos.
+// Exportamos una sola instancia lista para reusar en todo el proyecto
 export const storageService = new StorageService();

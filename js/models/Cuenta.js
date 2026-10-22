@@ -1,11 +1,9 @@
-// IMPORTAR UTILIDADES
+// Jalamos el generador de IDs para asignarle uno a cada cuenta nueva
 import { generarId } from "../utils/helpers.js";
 
-// MODELO CUENTA
-
-// Representa una cuenta bancaria perteneciente a un usuario.
+// Modelo que representa la cuenta bancaria del usuario
 export class Cuenta {
-  // CONSTRUCTOR
+  // Seteamos las propiedades por defecto si no nos pasan valores
   constructor({
     id = generarId(),
     numeroCuenta,
@@ -15,7 +13,7 @@ export class Cuenta {
     fechaApertura = new Date().toISOString(),
     activa = true,
   }) {
-    // PROPIEDADES
+    // Asignamos las propiedades
     this.id = id;
     this.numeroCuenta = numeroCuenta;
     this.tipo = tipo;
@@ -25,16 +23,14 @@ export class Cuenta {
     this.activa = activa;
   }
 
-  // METODOS DEPOSITAR Y RETIRAR
-
-  // Agrega un monto al saldo actual.
+  // Le sumamos dinero al saldo de la cuenta
   depositar(monto) {
     this.saldo += Number(monto);
 
     return this.saldo;
   }
 
-  // Resta un monto del saldo actual.
+  // Le descontamos dinero al saldo de la cuenta
   retirar(monto) {
     this.saldo -= Number(monto);
 

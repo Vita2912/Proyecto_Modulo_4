@@ -1,13 +1,9 @@
-// IMPORTAR UTILIDADES
-
-// Utilizamos generarId() para asignar automáticamente identificadores.
+// Jalamos la función para generar un ID único para cada usuario
 import { generarId } from "../utils/helpers.js";
 
-// MODELO USUARIO
-
-// Representa una persona registrada dentro del sistema bancario.
+// Modelo que representa a los usuarios del banco
 export class Usuario {
-  // CONSTRUCTOR
+  // Inicializamos la clase con sus datos por defecto
   constructor({
     id = generarId(),
     nombre,
@@ -16,7 +12,7 @@ export class Usuario {
     password,
     activo = true,
   }) {
-    // PROPIEDADES
+    // Seteamos los datos de la persona
     this.id = id;
     this.nombre = nombre;
     this.email = email;

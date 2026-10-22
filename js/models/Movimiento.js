@@ -1,11 +1,9 @@
-// IMPORTAR UTILIDADES
+// Jalamos el generador de IDs para asignarle un ID único a cada movimiento
 import { generarId } from "../utils/helpers.js";
 
-// MODELO MOVIMIENTO
-
-// Representa una operación bancaria realizada en una cuenta.
+// Modelo para guardar el registro de cada operación bancaria
 export class Movimiento {
-  // CONSTRUCTOR
+  // Seteamos las propiedades por defecto
   constructor({
     id = generarId(),
     tipo,
@@ -16,7 +14,7 @@ export class Movimiento {
     saldoResultante = null,
     fecha = new Date().toISOString(),
   }) {
-    // PROPIEDADES
+    // Guardamos las propiedades del movimiento
     this.id = id;
     this.tipo = tipo;
     this.monto = Number(monto);

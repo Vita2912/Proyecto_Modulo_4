@@ -1,0 +1,235 @@
+/* =========================================
+   PÁGINA DE MOVIMIENTOS
+========================================= */
+
+.app-movimientos {
+  min-height: 100vh;
+  background-color: #f4f6f8;
+}
+
+.movimientos-content {
+  width: min(1150px, 92%);
+  margin: 32px auto;
+  display: grid;
+  gap: 24px;
+}
+
+/* =========================================
+   ENCABEZADO
+========================================= */
+
+.movimientos-header {
+  padding: 28px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.movimientos-header h2 {
+  margin: 6px 0;
+  color: #003366; /* Azul primario bancario */
+}
+
+.movimientos-header p {
+  color: #556070;
+}
+
+/* =========================================
+   RESUMEN DE MOVIMIENTOS
+========================================= */
+
+.movimientos-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.movimiento-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  border-top: 4px solid #004080; /* Detalle azul bancario */
+}
+
+.movimiento-summary-card span {
+  color: #556070;
+}
+
+.movimiento-summary-card strong {
+  font-size: 1.5rem;
+  color: #002244;
+}
+
+/* =========================================
+   PANEL Y FILTROS
+========================================= */
+
+.movimientos-panel {
+  padding: 28px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.movimientos-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.movimientos-toolbar h3 {
+  margin-bottom: 5px;
+  color: #003366;
+}
+
+.movimientos-toolbar p {
+  color: #556070;
+}
+
+.movimientos-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* =========================================
+   BOTONES DE FILTRO
+========================================= */
+
+.filtro-btn {
+  padding: 9px 14px;
+  border: 1px solid #c2c9d6;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #003366;
+  cursor: pointer;
+  font-weight: 600;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+.filtro-btn:hover {
+  background-color: #f0f4f8;
+  border-color: #004080;
+}
+
+.filtro-btn.active {
+  border-color: #003366;
+  background-color: #003366; /* Estilo alineado con la barra de navegación */
+  color: #ffffff;
+}
+
+/* =========================================
+   TABLA DE MOVIMIENTOS
+========================================= */
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.movimientos-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.movimientos-table th,
+.movimientos-table td {
+  padding: 16px 14px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.movimientos-table th {
+  color: #003366;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-color: #f8fafc;
+}
+
+.movimientos-table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* =========================================
+   TIPOS DE MOVIMIENTO
+========================================= */
+
+.movimiento-tipo {
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.movimiento-entrada {
+  color: #14532d;
+}
+
+.movimiento-tipo.movimiento-entrada {
+  background-color: #dcfce7;
+}
+
+.movimiento-salida {
+  color: #991b1b;
+}
+
+.movimiento-tipo.movimiento-salida {
+  background-color: #fee2e2;
+}
+
+.movimiento-monto {
+  font-weight: 700;
+}
+
+/* =========================================
+   ESTADO VACÍO
+========================================= */
+
+.movimientos-empty {
+  padding: 48px 24px;
+  text-align: center;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  background-color: #f8fafc;
+}
+
+.movimientos-empty strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #003366;
+}
+
+.movimientos-empty p {
+  color: #64748b;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+  .movimientos-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .movimientos-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .movimientos-summary {
+    grid-template-columns: 1fr;
+  }
+}

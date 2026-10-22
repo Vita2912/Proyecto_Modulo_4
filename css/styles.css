@@ -1,49 +1,649 @@
-/* =========================================
-   RESETEO GENERAL
-========================================= */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* =========================================
-   CONFIGURACIÓN GENERAL DE LA PÁGINA
-========================================= */
 body {
   min-height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #4c96df;
-  color: #1f2937;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  background-color: #f4f6f9;
+  color: #0b2545;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* =========================================
-   CONTENEDOR PRINCIPAL
+   AUTENTICACIÓN
 ========================================= */
-.app {
+
+.auth-page {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: 24px;
+  padding: 48px 24px;
+  background-color: #004481;
+}
+
+.auth-header {
+  max-width: 900px;
+  margin: 0 auto 32px;
   text-align: center;
 }
 
-/* =========================================
-   TÍTULO PRINCIPAL
-========================================= */
-
-.app h1 {
+.auth-header h1 {
+  margin-bottom: 12px;
   font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.auth-header p {
+  margin-bottom: 8px;
+  color: #d4e5f7;
+}
+
+.auth-header span {
+  font-size: 0.9rem;
+  color: #d4e5f7;
+}
+
+.auth-container {
+  width: min(900px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.auth-card {
+  padding: 32px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 32, 64, 0.18);
+}
+
+.auth-card h2 {
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #004481;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0b2545;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #c1d3e8;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: 2px solid #1464a5;
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(20, 100, 165, 0.15);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #1464a5;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(20, 100, 165, 0.25);
+}
+
+.btn-primary:hover {
+  background-color: #004481;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: #0b2545;
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background-color: #183860;
+  transform: translateY(-1px);
 }
 
 /* =========================================
-   PÁRRAFOS
+   DASHBOARD
 ========================================= */
 
-.app p {
-  /* Tamaño del texto */
-  font-size: 1rem;
+.app-dashboard {
+  min-height: 100vh;
+  background-color: #f4f6f9;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px clamp(20px, 5vw, 72px);
+  background-color: #004481;
+  border-bottom: 1px solid #1464a5;
+  color: #ffffff;
+}
+
+.topbar h1 {
+  margin-bottom: 4px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.topbar p {
+  font-size: 0.95rem;
+  color: #d4e5f7;
+}
+
+.dashboard-nav {
+  display: flex;
+  gap: 12px;
+  padding: 14px clamp(20px, 5vw, 72px);
+  overflow-x: auto;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e1e8ed;
+}
+
+.dashboard-nav a {
+  padding: 9px 18px;
+  color: #0b2545;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.dashboard-nav a:hover,
+.dashboard-nav a.active {
+  background-color: #1464a5;
+  color: #ffffff;
+}
+
+.dashboard-content {
+  width: min(1100px, 92%);
+  margin: 32px auto;
+  display: grid;
+  gap: 24px;
+}
+
+.dashboard-welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 68, 129, 0.06);
+  border-left: 6px solid #1464a5;
+}
+
+.dashboard-label {
+  margin-bottom: 6px;
+  color: #1464a5;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dashboard-welcome h2 {
+  margin-bottom: 8px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #004481;
+}
+
+.dashboard-welcome p {
+  color: #5c748d;
+}
+
+/* =========================================
+   COMPONENTE SLIDER BBVA (CON IMÁGENES)
+========================================= */
+
+.bbva-slider-section {
+  display: grid;
+  gap: 16px;
+}
+
+.bbva-slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bbva-slider-header h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #004481;
+}
+
+.bbva-slider {
+  display: flex;
+  gap: 20px;
+  padding: 8px 4px 20px 4px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Personalización de barra de desplazamiento para el slider */
+.bbva-slider::-webkit-scrollbar {
+  height: 6px;
+}
+
+.bbva-slider::-webkit-scrollbar-track {
+  background: #e1e8ed;
+  border-radius: 10px;
+}
+
+.bbva-slider::-webkit-scrollbar-thumb {
+  background: #1464a5;
+  border-radius: 10px;
+}
+
+.slide-card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+  padding: 24px;
+  border-radius: 20px;
+  color: #ffffff;
+
+  /* Fondo base con imagen de banca digital */
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0, 68, 129, 0.85) 0%,
+      rgba(20, 100, 165, 0.85) 100%
+    ),
+    url("https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80")
+      center/cover no-repeat;
+
+  box-shadow: 0 10px 24px rgba(0, 68, 129, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.slide-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Variante Cyan con imagen de arquitectura/sede */
+.slide-card.variant-cyan {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(11, 37, 69, 0.85) 0%,
+      rgba(40, 167, 181, 0.85) 100%
+    ),
+    url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80")
+      center/cover no-repeat;
+}
+
+/* Variante Dark con imagen de pagos/tarjeta de crédito */
+.slide-card.variant-dark {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(7, 33, 70, 0.88) 0%,
+      rgba(0, 68, 129, 0.88) 100%
+    ),
+    url("https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=600&q=80")
+      center/cover no-repeat;
+}
+
+.slide-card-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.9;
+}
+
+.slide-card h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 6px;
+  line-height: 1.3;
+}
+
+.slide-card p {
+  font-size: 0.85rem;
+  opacity: 0.95;
+  margin-top: 4px;
+}
+
+.slide-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.slide-card-btn {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.slide-card-btn:hover {
+  background: #ffffff;
+  color: #004481;
+}
+
+/* =========================================
+   RESUMEN Y SECCIONES
+========================================= */
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 68, 129, 0.05);
+  border-top: 4px solid #28a7b5;
+}
+
+.summary-card span {
+  color: #5c748d;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.summary-card strong {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #004481;
+}
+
+.dashboard-section {
+  padding: 28px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 68, 129, 0.05);
+}
+
+.section-header {
+  margin-bottom: 22px;
+}
+
+.section-header h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #004481;
+}
+
+.section-header span {
+  display: block;
+  margin-bottom: 5px;
+  color: #5c748d;
+  font-size: 0.9rem;
+}
+
+.account-card {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.account-card div {
+  padding: 18px;
+  background-color: #f0f5fa;
+  border: 1px solid #d4e5f7;
+  border-radius: 14px;
+}
+
+.account-card span {
+  display: block;
+  margin-bottom: 8px;
+  color: #5c748d;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.account-card strong {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #004481;
+}
+
+/* =========================================
+   MI CUENTA
+========================================= */
+
+.app-cuenta {
+  min-height: 100vh;
+  background-color: #f4f6f9;
+}
+
+.cuenta-content {
+  width: min(1100px, 92%);
+  margin: 32px auto;
+}
+
+.cuenta-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(280px, 0.8fr)
+    minmax(0, 1.4fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.cuenta-card {
+  padding: 28px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 68, 129, 0.05);
+}
+
+.cuenta-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.cuenta-card-header h2 {
+  margin-bottom: 5px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #004481;
+}
+
+.cuenta-meta {
+  color: #5c748d;
+  font-size: 0.9rem;
+}
+
+.cuenta-detalle {
+  display: grid;
+  gap: 14px;
+}
+
+.cuenta-detalle p {
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e1e8ed;
+  font-size: 0.95rem;
+}
+
+.cuenta-detalle p:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.badge-success {
+  background-color: #d8f3dc;
+  color: #1b4332;
+}
+
+.badge-danger {
+  background-color: #fde2e4;
+  color: #8b0000;
+}
+
+.cuenta-panel {
+  display: grid;
+  gap: 24px;
+}
+
+.cuenta-section {
+  padding: 28px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 68, 129, 0.05);
+}
+
+.cuenta-section h3 {
+  margin-bottom: 22px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #004481;
+}
+
+.cuenta-form {
+  display: grid;
+  gap: 4px;
+}
+
+.field-error {
+  min-height: 18px;
+  margin-top: 6px;
+  color: #d90429;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.cuenta-section-danger {
+  border: 1px solid #f8d7da;
+  border-radius: 20px;
+}
+
+.cuenta-section-danger h3 {
+  color: #d90429;
+}
+
+.cuenta-warning {
+  margin-bottom: 18px;
+  color: #721c24;
+  font-size: 0.95rem;
+}
+
+.btn-danger {
+  background-color: #d90429;
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background-color: #a7001e;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+  .auth-container {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-page {
+    padding: 32px 16px;
+  }
+
+  .summary-grid,
+  .account-card {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cuenta-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cuenta-card-header {
+    flex-direction: column;
+  }
 }
